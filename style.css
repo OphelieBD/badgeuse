@@ -1,0 +1,175 @@
+body
+{
+	background-image: url('img/8.jpg');
+}
+
+h1
+{
+	text-align: center;
+	font-family: 'Libre Baskerville';
+	margin: 40px;
+	font-size: 3em;
+	padding: 20px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+#nbRestant
+{
+	text-align: center;
+	font-family: 'Libre Baskerville';
+	font-size: 0.4em;
+}
+
+.ensemble1Jour
+{
+	min-width: 160px;	
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.titre
+{
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: solid black 1px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.description
+{
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 200px;
+	font-size: 0.8em;
+}
+
+#grilleHebdo
+{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	font-family: 'Libre Baskerville';
+}
+
+#grilleContenu
+{
+	background-color: white;
+}
+
+#flecheGauche, #flecheDroite
+{
+	font-size: 4em;
+	margin: 40px;
+	margin-top: 0px;
+	color: rgba(255, 255, 255, 0.5);
+	margin-bottom: 0px;
+}
+
+ #flecheGauche:hover, #flecheDroite:hover, .btn
+{
+	cursor: pointer;
+}
+
+#fleches
+{
+	display: flex;
+	justify-content: space-around;
+}
+
+#flecheGauche
+{
+	text-align: left !important;
+}
+
+#flecheDroite
+{
+	float:right;
+}
+
+form
+{
+	display: none;
+	width: 50%;
+	margin: auto;
+	margin-bottom: 50px;
+}
+
+input
+{
+	margin-bottom: 10px;
+}
+
+#boutonValidation
+{
+	float: right;
+	margin-top: 5px;
+	border: none !important;
+	margin-bottom: 40px;
+}
+
+.jourJ
+{
+	border: 5px solid #17172E !important;
+}
+
+#confirmationEnvoi
+{
+	text-align: center;
+}
+
+#btnHoraires
+{
+	display: flex;
+	justify-content: space-around;
+}
+
+#btnStart, #btnFinish
+{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	width: 300px;
+	font-family: 'Libre Baskerville' !important;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: black;
+	border: none;
+}
+
+.msg
+{
+	font-size: 0.7em;
+}
+
+@media all and (max-width: 992px)
+{
+	.ensemble1Jour
+	{
+		border-right: 1px solid #5A5A5A !important;
+	}
+
+	.jourJ
+	{
+		border: 5px solid #A74B4B !important;
+	}
+}
+
+@media all and (max-width: 650px)
+{
+	form
+	{
+		width: 88%;
+	}
+}
+
+@media all and (max-width: 575px)
+{
+	#grilleHebdo
+	{
+		margin-right: 20px;
+		margin-left: 20px;
+	}
+}

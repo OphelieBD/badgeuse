@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Badgeuse">
+		<meta name="author" content="Ophélie Bayart-Devulder">
+		<title>Badgeuse</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+		<link rel="stylesheet" href="style.css"/>
+		<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+	</head>
+
+	<body>
+		<h1 class="ml12">
+			Bosse bien!
+			<div id="nbRestant">Il te reste <span id="heuresAFaire"></span> à faire pour atteindre les 40h de travail par semaine!</div> <!-- Contiendra le nombre d'heures restantes sur 40h/semaine -->
+		</h1>
+
+		<div>
+			<span><i id="flecheGauche" class="fas fa-long-arrow-alt-left"></i></span> <!-- Pour avancer ou reculer dans les semaines -->
+			<span><i id="flecheDroite" class="fas fa-long-arrow-alt-right"></i></span>
+		</div>
+
+		<div id="grilleHebdo" class="container"> <!-- Contiendra les cases de l'agenda générées en JS -->
+			<div id="grilleContenu" class="row"></div>
+		</div> 
+
+		<form id="form" method="post" action="controleur.php">
+			<label for="heureDebut" id="label1">Heure de début</label>: <input type="time" name="heureDebut" id="heureDebut" class="form-control"/>
+			<label for="heureFin" id="label2">Heure de fin</label>: <input type="time" name="heureFin" id="heureFin" class="form-control"/>
+			<input id="champCache" type="hidden" name="jourClique" value=""/> <!-- Utile pour le JS (date du jour cliqué) -->
+			<input id="champCache2" type="hidden" name="action" value="insertionHoraires"/> <!-- Utile pour le JS -->
+			<button id="boutonValidation" class="btn btn-primary" type="submit" disabled="disabled">Valider</button>
+		</form>
+
+		<div id="confirmationEnvoi"></div>
+
+		<div class="container">
+			<div class="row" id="btnHoraires">
+				<button id="btnStart" type="submit" class="btn btn-primary">COMMENCER<br/><span class="msg">(bon courage!)</span></button> <!-- Boutons de badgeage -->
+				<button id="btnFinish" type="submit" class="btn btn-primary" disabled="disabled">TERMINER<br/><span class="msg">(repos bien mérité!)</span></button>
+			</div>
+		</div>
+
+		<div id="hDebut"></div>;
+		<div id="hFin"></div>;
+
+		<!-- Intégration des fichiers Bootstrap, JS & jQuery-->
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+		<script src="badgeuse.js"></script>
+	</body>
+</html>
