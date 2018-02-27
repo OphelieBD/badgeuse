@@ -36,6 +36,13 @@
 					insertionFinAuto($_POST['heureFin']);
 				}
 			break;
+
+			case 'modifHoraires': 
+				if (isset($_POST['heureDebutEdite']) && isset($_POST['heureFinEdite']) && isset($_POST['id'])) 
+				{
+					modificationHoraires($_POST['heureDebutEdite'], $_POST['heureFinEdite'], $_POST['id']);
+				}
+			break;
 		}
 	}
 
@@ -79,4 +86,19 @@
 		);
 		echo json_encode($envoiAutoHorairesFin);
 	}	
+
+	function modificationHoraires($heuredebut, $heurefin, $id)
+	{
+		$modifHoraires = SQLEditWithParams(
+		"UPDATE 
+			badge
+		SET 
+			heureDebut = :heureDebut,
+			heureFin = :heureFin 
+		WHERE
+			id = :id",
+		array("heureDebut"=>$heuredebut, "heureFin"=>$heurefin, "id"=>$id)
+		);
+		echo json_encode($modifHoraires);
+	}
 ?>

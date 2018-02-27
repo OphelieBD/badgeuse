@@ -16,6 +16,7 @@
 		<h1 class="ml12">
 			Bosse bien!
 			<div id="nbRestant">Il te reste <span id="heuresAFaire"></span> à faire pour atteindre les 40h de travail par semaine!</div> <!-- Contiendra le nombre d'heures restantes sur 40h/semaine -->
+			<div id="nbRestantJour">Il te reste <span id="heuresAFaireJour"></span> à faire pour atteindre les 8h de travail par jour!</div>
 		</h1>
 
 		<div>
@@ -33,6 +34,16 @@
 			<input id="champCache" type="hidden" name="jourClique" value=""/> <!-- Utile pour le JS (date du jour cliqué) -->
 			<input id="champCache2" type="hidden" name="action" value="insertionHoraires"/> <!-- Utile pour le JS -->
 			<button id="boutonValidation" class="btn btn-primary" type="submit" disabled="disabled">Valider</button>
+		</form>
+
+		<form id="formEdite" method="post" action="controleur.php">
+			<label for="heureDebutEdite" id="label1Edite">Heure de début</label>: <input type="time" name="heureDebutEdite" id="heureDebutEdite" class="form-control"/>
+			<label for="heureFinEdite" id="label2Edite">Heure de fin</label>: <input type="time" name="heureFinEdite" id="heureFinEdite" class="form-control"/>
+			<input id="champCacheEdite" type="hidden" name="id" value=""/> <!-- Utile pour le JS (id) -->
+			<input id="champCache3Edite" type="hidden" name="heureDebutAvant" value=""/> <!-- Utile pour le JS (ancienne heure de début) -->
+			<input id="champCache4Edite" type="hidden" name="heureFinAvant" value=""/> <!-- Utile pour le JS (anicenne heure de fin) -->
+			<input id="champCache2Edite" type="hidden" name="action" value="modifHoraires"/> <!-- Utile pour le JS -->
+			<button id="boutonValidationEdite" class="btn btn-primary" type="submit" disabled="disabled">Valider</button>
 		</form>
 
 		<div id="confirmationEnvoi"></div>

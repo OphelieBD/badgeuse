@@ -104,14 +104,14 @@ function afficheSemaine(array){
 // Fonction appelée quand on clique sur une case, pour que le formulaire apparaisse
 function clicGrille(mot)
 {
-    $("form").fadeIn('slow');
+    $("#form").fadeIn('slow');
     $('#btnHoraires').css('display', 'none'); 
     var dateSelectionnee = $(mot).text(); //on récupère la date du jour cliqué
     $("#champCache").val(dateSelectionnee); //et on le met dans l'input hidden pour le transmettre lors de l'appel ajax à la BDD
 
     $('.titre').on('click', function() //quand on clique ailleurs sur la page, le formulaire disparait
 	{
-		$('form').css("display", "none");
+		$('#form').css("display", "none");
     	$('#btnHoraires').fadeIn(1000, 'linear');
 	});
 }
@@ -180,13 +180,11 @@ function afficherPlanning(data) //affiche les horaires présents en base de donn
         {
             if (date == getAffichageCorrect(semaineTableau[j]))
             {
-                $('.description').eq(recupBonJour(semaineTableau[j])).append('<div class="horairesAjoutes" onClick="editForm(heureDebut, heureFin);">'+ bonneHeureDebut + ' - ' + bonneHeureFin +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="modif fas fa-pencil-alt"></i></div>'+
-                															' = ' + '<span class="totalJour"><strong>' + h + 'h' + mm + '</strong></span> <br/><br/>');
+                $('.description').eq(recupBonJour(semaineTableau[j])).append("<div class='horairesAjoutes' onclick='editForm(\"" + bonneHeureDebut + "\", \"" +bonneHeureFin+ "\", \"" +id+ "\");'>"+ bonneHeureDebut + " à " + bonneHeureFin +"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='modif fas fa-pencil-alt'></i></div>"+
+                															" = " + "<span class='totalJour'><strong><span id='heure'>" + h + "</span>h<span id='minutes'>" + mm + "</span></strong></span><br/><span class='idCache'>"+id+"</span><br/>");
 		    	
                	totalTableau[j] += ecart; // j'ajoute dans la case j du tableau l'écart correspondant
 			}      
-
-
         } 
     }
 
@@ -208,11 +206,73 @@ function afficherPlanning(data) //affiche les horaires présents en base de donn
     {
 	    $('#heuresAFaire').append(hRestantes + ' heures et ' +mRestantes + ' minutes');
     }
+
+    var dateAttendue = $('.jourJ').text(); // calcul du nombre d'heures restants sur une journée de 8h
+    dateAttendue = dateAttendue.substr(0,10);
+    var heureMinutes = parseInt($('#heure').text()) * 60 + parseInt($('#minutes').text());
+    var heuresRestantesJour = 8*60 - parseInt(heureMinutes); 
+    var mRestantesJour = heuresRestantesJour%60;
+    var hRestantesJour = (heuresRestantesJour-mRestantesJour)/60;
+    
+   	if (dateAttendue == getAffichageCorrect(today)) 
+   	{
+   		if (heureMinutes >= (8*60))
+	   	{
+	   		$('#heuresAFaireJour').append('rien');
+		}
+		else
+		{
+			$('#heuresAFaireJour').append(hRestantesJour + " heures et " + mRestantesJour + " minutes");
+		}
+
+    }
+    
 }
 
 //fonction appelée quand on clique sur un horaire du tableau
-function editForm(data1, data2){
-	console.log($('data1').val());
+function editForm(heurededebut, heuredefin, id)
+{
+	$("#formEdite").fadeIn('slow'); // on fait apparaitre le formulaire
+    $('#btnHoraires').css('display', 'none'); 
+    $('#boutonValidationEdite').removeAttr('disabled');
+    $('#heureDebutEdite').val(heurededebut); //on met les anciens horaires dans le form pour qu'ils s'affichent, puis dans les champs cachés
+    $('#heureFinEdite').val(heuredefin);
+    $('#champCacheEdite').val(id);
+    $('#champCache3Edite').val(heurededebut);
+    $('#champCache4Edite').val(heuredefin);
+
+    var dateCorrecte = $(heurededebut).find('.description').parent().find('.titre').val(); // récupération de la date
+
+    $('.titre').on('click', function() //quand on clique ailleurs sur la page, le formulaire disparait
+	{
+		$('#formEdite').css("display", "none");
+    	$('#btnHoraires').fadeIn(1000, 'linear');
+	});
+
+	$('#formEdite').submit(function(e){
+		var dato = $(this).serialize();
+	    $("#heureDebutEdite, #heureFinEdite").val(''); // vide les input
+	    $("#boutonValidationEdite").attr('disabled', 'disabled'); //remet le bouton disable
+	    e.preventDefault(); // Annulation de l'envoi des données via le formulaire (car on le fait via ajax)
+	    $.ajax({
+	        type : "POST",
+	        url: 'controleur.php',
+	        dataType: 'json',
+	        data: dato,
+	        success : function() {
+				recuperationBDD();
+	    		$("#formEdite").delay(1000).fadeOut(1000, "linear");  
+	            $("#confirmationEnvoiEdite").html("Bien enregistré"); // message de validation
+	            $("#confirmationEnvoiEdite").delay(1000).fadeOut(1000, 'linear'); 
+	    		$('#btnHoraires').delay(1000).fadeIn(1000, "linear"); 
+	        },
+	        error: function() {
+	   			$("#formEdite").delay(1000).fadeOut(1000, "linear"); 
+	            $("#confirmationEnvoiEdite").html("Erreur d'appel Ajax");
+	            $("#confirmationEnvoiEdite").delay(1000).fadeOut(100, 'linear'); 
+	        }
+	    });
+	});
 }
 
 // Date du jour
@@ -275,13 +335,13 @@ $("#form").submit(function(e){ //Dès qu'on valide le formulaire, on fait requê
         data: dato,
         success : function() {
 			recuperationBDD();
-    		$("form").delay(1000).fadeOut(1000, "linear");  
+    		$("#form").delay(1000).fadeOut(1000, "linear");  
             $("#confirmationEnvoi").html("Bien enregistré"); // message de validation
             $("#confirmationEnvoi").delay(1000).fadeOut(1000, 'linear'); 
     		$('#btnHoraires').delay(1000).fadeIn(1000, "linear"); 
         },
         error: function() {
-   			$("form").delay(1000).fadeOut(1000, "linear"); 
+   			$("#form").delay(1000).fadeOut(1000, "linear"); 
             $("#confirmationEnvoi").html("Erreur d'appel Ajax");
             $("#confirmationEnvoi").delay(1000).fadeOut(100, 'linear'); 
         }

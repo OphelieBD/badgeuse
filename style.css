@@ -13,7 +13,7 @@ h1
 	background-color: rgba(255, 255, 255, 0.5);
 }
 
-#nbRestant
+#nbRestant, #nbRestantJour
 {
 	text-align: center;
 	font-family: 'Libre Baskerville';
@@ -117,7 +117,7 @@ input
 	border: 5px solid #17172E !important;
 }
 
-#confirmationEnvoi
+#confirmationEnvoi, #confirmationEnvoiEdite
 {
 	text-align: center;
 }
@@ -142,6 +142,16 @@ input
 .msg
 {
 	font-size: 0.7em;
+}
+
+label
+{
+	color: white;
+}
+
+.idCache
+{
+	display: none;
 }
 
 @media all and (max-width: 992px)
