@@ -13,7 +13,7 @@ h1
 	background-color: rgba(255, 255, 255, 0.5);
 }
 
-#nbRestant, #nbRestantJour
+#nbRestant, #compte_a_rebours, #nbRestantJour
 {
 	text-align: center;
 	font-family: 'Libre Baskerville';

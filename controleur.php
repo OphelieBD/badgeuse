@@ -48,7 +48,7 @@
 
 	function affichagePlanning() //Renvoie la liste des évènements présents en BDD
 	{
-		$resultatHoraires = SQLSelect("SELECT * FROM badge");
+		$resultatHoraires = SQLSelect("SELECT * FROM badge ORDER BY id");
 		echo json_encode($resultatHoraires);	
 	}
 
